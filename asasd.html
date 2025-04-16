@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Empleados</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f6f8;
+      padding: 20px;
+    }
+
+    .contenedor-empleados {
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 30px;
+    }
+
+    .empleados-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .card-empleado {
+      background: white;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: transform 0.2s;
+    }
+
+    .card-empleado:hover {
+      transform: scale(1.02);
+    }
+
+    .card-empleado img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 10px;
+      border: 3px solid #27ae60;
+    }
+
+    .card-empleado h3 {
+      margin: 0;
+      color: #34495e;
+    }
+
+    .card-empleado p {
+      margin: 5px 0;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <div class="contenedor-empleados">
+    <h1>Nómina de Empleados</h1>
+    <div id="lista-empleados" class="empleados-grid"></div>
+  </div>
+
+  <script>
+    const empleados = [
+      {
+        nombre: "Carlos Méndez",
+        cedula: "001-1234567-8",
+        telefono: "809-555-1234",
+        correo: "carlos@gmail.com",
+        cargo: "Profesor de deportes",
+        sueldo: 45000,
+        horas: 35,
+        foto: "Imagenes/sociales.jpg"
+      },
+      {
+        nombre: "Ana López",
+        cedula: "001-8765432-1",
+        telefono: "829-333-9876",
+        correo: "ana@gmail.com",
+        cargo: "Niñera",
+        sueldo: 25000,
+        horas: 28,
+        foto: "Imagenes/maria niñera.jpg"
+      },
+      {
+        nombre: "Luis Castillo",
+        cedula: "001-4567890-2",
+        telefono: "849-777-6543",
+        correo: "luis@gmail.com",
+        cargo: "Profesor de sociales",
+        sueldo: 32000,
+        horas: 33,
+        foto: "Imagenes/matematicas.jpg"
+      },
+      {
+        nombre: "María Vargas",
+        cedula: "001-2345678-9",
+        telefono: "809-666-8888",
+        correo: "maria@gmail.com",
+        cargo: "Profesora de dibujos",
+        sueldo: 30000,
+        horas: 31,
+        foto: "Imagenes/Morena.jpg"
+      },
+      {
+        nombre: "Pedro Ramírez",
+        cedula: "001-1122334-5",
+        telefono: "829-111-2233",
+        correo: "pedro@gmail.com",
+        cargo: "Profesor de matematicas",
+        sueldo: 28000,
+        horas: 29,
+        foto: "Imagenes/naturales.jpg"
+      }
+    ];
+
+    function calcularTotal(emp) {
+      let extra = emp.horas > 30 ? emp.sueldo * 0.20 : 0;
+      let descuento = emp.sueldo * 0.05;
+      return (emp.sueldo + extra - descuento).toFixed(2);
+    }
+
+    const lista = document.getElementById("lista-empleados");
+
+    empleados.forEach(emp => {
+      const tarjeta = document.createElement("div");
+      tarjeta.classList.add("card-empleado");
+
+      tarjeta.innerHTML = `
+        <img src="${emp.foto}" alt="Empleado">
+        <h3>${emp.nombre}</h3>
+        <p><strong>Cédula:</strong> ${emp.cedula}</p>
+        <p><strong>Teléfono:</strong> ${emp.telefono}</p>
+        <p><strong>Correo:</strong> ${emp.correo}</p>
+        <p><strong>Cargo:</strong> ${emp.cargo}</p>
+        <p><strong>Sueldo:</strong> $${emp.sueldo}</p>
+        <p><strong>Horas Extra:</strong> ${emp.horas}</p>
+        <p><strong>Total con Ajustes:</strong> $${calcularTotal(emp)}</p>
+      `;
+
+      lista.appendChild(tarjeta);
+    });
+  </script>
+</body>
+</html>
